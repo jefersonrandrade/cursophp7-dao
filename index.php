@@ -21,9 +21,15 @@ require_once("config.php");
 //$usuario->login("JEFERSON", "159753");
 //echo $usuario;
 
-$aluno = new Usuario("joquinha", "bundao");
-$aluno->insert();
-echo $aluno;
+//Criando um novo usuario
+//$aluno = new Usuario("joquinha", "bundao");
+//$aluno->insert();
+//echo $aluno;
 
+$usuario = new Usuario();
+$usuario->loadById(2);
+$usuario->update("Jeferson Andrade", "56238914");
+
+echo $usuario;
 
 ?>
