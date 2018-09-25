@@ -8,8 +8,12 @@ require_once("config.php");
 //echo $root;
 
 //Exibe uma lista de cadastros
-$lista = Usuario::getList();
+//$lista = Usuario::getList();
+//echo json_encode($lista);
 
-echo json_encode($lista);
+//Exibe uma busca por um termo 
+//dos itens cadastrados.
+$search = Usuario::search("je");
+echo json_encode($search);
 
 ?>
