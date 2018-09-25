@@ -40,7 +40,6 @@ class Usuario {
 	}
 
 	public function loadById($id) {
-
 		$sql = new Sql();
 
 		$results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :ID",array(
@@ -53,24 +52,20 @@ class Usuario {
 	}
 
 	public static function getList() {
-
 		$sql = new Sql();
 
 		return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin;");
 	}
 
 	public static function search($login) {
-
 		$sql = new Sql();
 
 		return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SEARCH ORDER BY deslogin", array(
 			':SEARCH'=>"%".$login."%"
 		));
-
 	}
 
 	public function login($login, $password) {
-
 		$sql = new Sql();
 
 		$results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :PASSWORD",array(
@@ -83,7 +78,6 @@ class Usuario {
 		} else {
 			throw new Exception("Login e/ou senha incorretos");
 		}
-
 	}
 
 	public function setData($data) {
@@ -94,7 +88,6 @@ class Usuario {
 	}
 
 	public function insert() {
-
 		$sql = new Sql();
 
 		$results = $sql->select("CALL sp_usuarios_insert(:LOGIN , :PASSWORD)", array(
@@ -105,11 +98,9 @@ class Usuario {
 		if (count($results) > 0) {
 			$this->setData($results[0]);
 		}
-
 	}
 
 	public function update($login, $password) {
-
 		$this->setDeslogin($login);
 		$this->setDessenha($password);
 
@@ -120,7 +111,19 @@ class Usuario {
 			':PASSWORD'=>$this->getDessenha(),
 			':ID'=>$this->getIdusuario()
 		));
+	}
 
+	public function delete() {
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM tb_usuarios WHERE idusuario = :ID;", array(
+			':ID'=>$this->getIdusuario();
+		));
+
+		$this->setIdusuario(0);
+		$this->setDeslogin("");
+		$this->setDessenha("");
+		$this->setDtcadastro(new DateTime());
 	}
 
 	public function __construct($login = "", $password = "") {
