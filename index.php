@@ -13,7 +13,13 @@ require_once("config.php");
 
 //Exibe uma busca por um termo 
 //dos itens cadastrados.
-$search = Usuario::search("je");
-echo json_encode($search);
+//$search = Usuario::search("je");
+//echo json_encode($search);
+
+//Carrega um usuario usando um login e senha
+$usuario = new Usuario();
+$usuario->login("JEFERSON", "159753");
+echo $usuario;
+
 
 ?>
