@@ -2,10 +2,14 @@
 
 require_once("config.php");
 
-$root = new Usuario();
+//Exibe um cadastro
+//$root = new Usuario();
+//$root->loadById(2);
+//echo $root;
 
-$root->loadById(2);
+//Exibe uma lista de cadastros
+$lista = Usuario::getList();
 
-echo $root;
+echo json_encode($lista);
 
 ?>
